@@ -4,4 +4,8 @@ class SobreController < ApplicationController
     
   end
   
+  def facebook
+    
+  end
+  
 end
