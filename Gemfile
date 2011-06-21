@@ -11,6 +11,7 @@ gem 'validates_timeliness', '~> 3.0.2'
 gem "omniauth"
 gem "aws-s3"
 gem "dalli"
+gem "enumerate_it"
 
 group :production do
 end
@@ -27,6 +28,7 @@ group :test do
   gem 'rspec-rails'      , '>=2.0.1'
   gem 'remarkable'       , '3.1.13'  , :require => false
   gem 'remarkable_rails' , '3.1.13'  , :require => false
+  gem 'webrat'
 end
 
 group :cucumber do

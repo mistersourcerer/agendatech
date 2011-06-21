@@ -10,7 +10,12 @@ class EventosController < ApplicationController
       else
         @eventos = Evento.que_ainda_vao_rolar
       end
-    end
+    end    
+  end
+  
+  def cursos
+    @eventos = Evento.que_ainda_vao_rolar(TipoEvento::CURSO)
+    render :action => 'index'
   end
 
   def new
@@ -61,6 +66,10 @@ class EventosController < ApplicationController
     evento.gadgets.each do |g|
       @participantes << Twitter.user(User.find(g.user_id).nickname).name
     end
+  end
+  
+  def facebook
+    # testing facebook app
   end
 
 end

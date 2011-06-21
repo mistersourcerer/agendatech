@@ -45,6 +45,7 @@
           <li><%= tab_link_to "iCal", calendario_link_path %></li>
           <li><%= tab_link_to "Contato", contato_path %></li>
           <li><%= tab_link_to "Sobre", sobre_path %></li>
+          <li><%= tab_link_to "Cursos", cursos_path(:ano => Time.now.year) %></li>
           <li><%= tab_link_to "Grupos",  grupos_path %></li>
           <li><%= tab_link_to "Eventos", eventos_path %></li>
         </ul>
@@ -68,7 +69,7 @@
 					</a>
 					<div class="banner_quems">
 						<p>Quem vai <br/> na <strong>QCon</strong>:</p>
-						<%= eu_vou Evento.find(336) %> 
+						<%= eu_vou Evento.find(336) %> <!--336-->
 		        <% Evento.find(336).me_da_gadgets.eu_vou.each do |gadget| %>
 		          <div class="quem_vai_pic"> 
 		            <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
