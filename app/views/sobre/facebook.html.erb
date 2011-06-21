@@ -8,3 +8,10 @@
 	show_faces="true" 
 	font="">
 </fb:like>
+
+<script>
+  // this will fire when any of the like widgets are "liked" by the user
+  FB.Event.subscribe('edge.create', function(href, widget) {
+    alert("Liked!");
+  });
+</script>
