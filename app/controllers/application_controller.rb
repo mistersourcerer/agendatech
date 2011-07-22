@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :tag_cloud, :twitter_search
+  before_filter :tag_cloud, :twitter_search,:evento_destaque
   helper_method :meses, :numero_do_mes, :estados, :nome_do_estado
 
   protected
@@ -95,6 +95,11 @@ class ApplicationController < ActionController::Base
     end
     @twits
     
+  end
+
+  def evento_destaque
+    #mangueziho para ajustar o banner da qcon TODO retirar...
+    @destaque = Evento.where(:destaque => true).first
   end
 
 
