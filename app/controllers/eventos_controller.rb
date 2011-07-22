@@ -61,7 +61,6 @@ class EventosController < ApplicationController
   
   def lista
     @participantes = []
-    puts params[:id]
     evento = Evento.find_by_cached_slug(params[:id])
     evento.gadgets.each do |g|
       @participantes << Twitter.user(User.find(g.user_id).nickname).name

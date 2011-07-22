@@ -42,7 +42,7 @@ Agendatech::Application.routes.draw do
   match 'busca/eventos/:estado' => 'eventos#index', :as => :eventos_por_estado
   match 'busca/eventos/:ano/:month' => 'eventos#index', :as => :eventos_por_mes
   match 'cursos/tecnologia/:ano' => 'eventos#cursos', :as => :cursos
-  match 'eventos/lista/:evento_name' => 'eventos#lista'
+  match 'eventos/lista/:id' => 'eventos#lista'
   match 'atividades/:nick' => 'atividades_do_usuario#index', :as => :atividades_do_usuario
   match '/:controller(/:action(/:id))'
 end
