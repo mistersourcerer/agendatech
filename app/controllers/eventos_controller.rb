@@ -63,7 +63,11 @@ class EventosController < ApplicationController
     @participantes = []
     evento = Evento.find_by_cached_slug(params[:id])
     evento.gadgets.each do |g|
-      @participantes << Twitter.user(User.find(g.user_id).nickname).name
+      begin
+        @participantes << Twitter.user(User.find(g.user_id).nickname).name
+      rescue
+        @participantes << "Twitter nao encontrado => #{g.user_id}"
+      end
     end
   end
   
