@@ -1060,10 +1060,11 @@ img.quote{
 	float: left;
   color: #666666;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 21px;
   text-decoration: none;
   margin-bottom: 10px;
-  width: 600px;
+  width: 730px;
+  font-weight: normal;
   }
    
    
