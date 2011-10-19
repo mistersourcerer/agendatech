@@ -689,6 +689,7 @@ a:link.menu_select, a:visited.menu_select  {
 .quem_vai_pic {
   float: left;
   margin-top: -32px;
+  margin-bottom: 30px;
 }
 
 .quem_vai_pics {

@@ -11,7 +11,7 @@ class EventosController < ApplicationController
         @eventos = Evento.que_ainda_vao_rolar
       end
     end    
-    @destaque = Evento.last#.where(:nome => 'RubyConf Brazil 2011').first
+    @destaque = Evento.find_by_destaque(true)
   end
   
   def cursos
