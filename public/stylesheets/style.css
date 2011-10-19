@@ -524,7 +524,7 @@ a:visited {
   background-color: #4A4A47;
   margin-bottom: 10px;
   margin-left: 12px;
-	background: url('/images/banner_qconsp.jpg');
+	background: url('/images/rubyconf.jpg');
 	margin-bottom: 20px;
 	border: 4px solid #ffffff;
 	box-shadow: 0px 0px 5px #999;
@@ -681,21 +681,22 @@ a:link.menu_select, a:visited.menu_select  {
 .quem_vai {
   float: right;
   width: 408px;
-  padding-top: 9px;
+  padding-top: 18px;
   border-top: 1px solid #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 45px;
 }
 
 .quem_vai_pic {
   float: left;
+  margin-top: -32px;
 }
 
 .quem_vai_pic img{
-  border: 1px solid #ccc;
-  padding: 2px;
+  border: 0px solid #ccc;
+  padding-right : 4px;
   margin-right: 2px;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
 }
 
 
@@ -786,7 +787,7 @@ a.button{
   padding:5px;
   float: left;
   margin-right: 10px
-  
+
 
   border-top:1px solid #f2f2f2;
   border-left:1px solid #f2f2f2;
@@ -796,6 +797,13 @@ a.button{
   border-style: solid;
   border-width: 1px;
 }
+
+.st_banner{
+  position: relative;
+  top: -40px;
+  left: 135px;    
+}
+
 .tweet{
   color: #ffffff;
   padding: 8px;
@@ -1019,7 +1027,7 @@ img.quote{
     box-shadow: 0 0 2px #999999;
     float: left;
     left: 13px;
-		background: #F1E997;
+/*    background: #F1E997;*/
 		margin-top: 1px;
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -1033,8 +1041,29 @@ img.quote{
 
 .banner_quems p{
 	float: left;
-	font-size: 14px;
-	color: #666666;
-	font-weigh: bold;
-	padding-right: 20px;
-}
+  color: #444444;
+   font-size: 20px;
+   font-weight: bold;
+   line-height: 24px;
+   text-decoration: none;}
+   
+.banner_quems p strong{
+  color: #9F111B;
+}     
+   
+.banner_quems p.sub{
+	float: left;
+  color: #666666;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  width: 600px;
+  }
+   
+   
+.banner_quems img{
+  float: left;
+  margin-bottom: 10px;
+    margin-right: 10px;  
+}   
