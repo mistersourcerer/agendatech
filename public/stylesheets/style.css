@@ -682,8 +682,8 @@ a:link.menu_select, a:visited.menu_select  {
   float: right;
   width: 408px;
   padding-top: 18px;
-  border-top: 1px solid #ffffff;
-  margin-bottom: 45px;
+  border-top: 1px solid #ffffff;  
+  margin-bottom: 30px;
 }
 
 .quem_vai_pic {
