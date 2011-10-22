@@ -11,7 +11,8 @@ class EventosController < ApplicationController
         @eventos = Evento.que_ainda_vao_rolar
       end
     end    
-    @destaque = Evento.find_by_destaque(true)
+    # usado para promocoes e destaques
+    # @destaque = Evento.find_by_destaque(true)
   end
   
   def cursos
