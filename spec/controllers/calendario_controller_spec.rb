@@ -23,7 +23,7 @@ describe CalendarioController do
     qcon.should_receive(:descricao).and_return('descrevendo')
     eventos = []
     eventos << qcon
-    Evento.should_receive(:estado_aprovado).with('BA').and_return(eventos)
+    Evento.should_receive(:por_estado).with('BA').and_return(eventos)
     get 'index',:estado => 'Bahia'
   end  
 
