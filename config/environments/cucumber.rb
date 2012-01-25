@@ -1,4 +1,5 @@
 Agendatech::Application.configure do
+  config.active_support.deprecation = :stderr
 
   # Edit at your own peril - it's recommended to regenerate this file
   # in the future when you upgrade to a newer version of Cucumber.
@@ -12,7 +13,7 @@ Agendatech::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.action_controller.consider_all_requests_local = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching             = false
 
   # Disable request forgery protection in test environment
