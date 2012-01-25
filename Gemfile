@@ -19,15 +19,12 @@ end
 group :development do
   gem 'rspec'            
   gem 'rspec-rails'      , '>=2.0.1'
-  gem 'remarkable'       , '3.1.13'  , :require => false
-  gem 'remarkable_rails' , '3.1.13'  , :require => false
+  gem 'shoulda-matchers'
 end
 
 group :test do
   gem 'rspec'            
   gem 'rspec-rails'      , '>=2.0.1'
-  gem 'remarkable'       , '3.1.13'  , :require => false
-  gem 'remarkable_rails' , '3.1.13'  , :require => false
   gem 'webrat'
 end
 
