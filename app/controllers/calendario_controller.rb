@@ -2,7 +2,7 @@ class CalendarioController < ApplicationController
 def index
 
     if params[:estado]
-      @eventos = Evento.por_estado(estados.index(params[:estado]))
+      @eventos = Evento.por_estado(estados.key(params[:estado]))
     else
       @eventos = Evento.all
     end
