@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'spec_helper'
 
 describe EventosController do
@@ -40,26 +41,27 @@ describe EventosController do
   end
   
   describe "post para create" do
+
     it "deveria salvar o evento com a data de termino igual a de inicio caso nao tenha sido passada a de termino" do
-      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'BA'}
+      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data => Time.new.strftime("%d/%m/%Y"), :estado => 'BA'}
       assigns[:evento].aprovado.should be_false
       assigns[:evento].tipo_evento.should eq TipoEvento::CONFERENCIA
       assigns[:evento].data_termino.to_date.should eq Date.today.to_date
       flash[:aguarde].should eq "Obrigado! Seu evento aparecerá na lista em instantes!"
       response.should redirect_to :action =>"index"
     end
-    
+
     it "deveria salvar o evento com a data de termino especificada" do
-      data_termino = Date.today + 1.day
-      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data => Date.today,:data_termino => data_termino ,:estado => 'BA'}
+      data_termino = (Time.zone.now + 1.day)
+      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data =>  Time.new.strftime("%d/%m/%Y"),:data_termino => data_termino.strftime("%d/%m/%Y"), :estado => 'BA'}
       assigns[:evento].aprovado.should be_false
-      assigns[:evento].tipo_evento.should eq TipoEvento::CONFERENCIA      
-      assigns[:evento].data_termino.to_date.should eq data_termino
+      assigns[:evento].tipo_evento.should eq TipoEvento::CONFERENCIA
+      assigns[:evento].data_termino.to_date.should eq data_termino.to_date
       flash[:aguarde].should eq "Obrigado! Seu evento aparecerá na lista em instantes!"
       response.should redirect_to :action =>"index"
-    end       
+    end
   end
-  
+
    describe "comentando evento" do
      it "deveria adicionar um a mais pegando o usuario do twitter da pessoa logada" do
         usuario_logado = User.new(:nickname => "teste",:email => "teste@teste.com.br",:image => "http://a3.twimg.com/profile_images/1201901056/ic_launcher.png")
