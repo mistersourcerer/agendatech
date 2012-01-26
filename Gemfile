@@ -1,5 +1,5 @@
 source :rubygems
-gem "mysql2"
+gem "mysql2", "~>0.2.18"
 gem 'rails', '3.0.3'
 gem "paperclip"
 gem "twitter"
