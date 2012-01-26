@@ -1,3 +1,4 @@
+#encoding: utf-8
 class GruposController < ApplicationController
   def index
     @grupos = Grupo.por_nome.aprovados

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class EventosController < ApplicationController
   uses_tiny_mce :only => [:new,:create]
 

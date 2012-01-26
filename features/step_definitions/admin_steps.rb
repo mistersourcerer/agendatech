@@ -1,3 +1,4 @@
+#encoding: utf-8
 Dado /^que o evento abaixo existe:$/ do |table|
   table.hashes.each do |hash|
     e = Evento.new hash
