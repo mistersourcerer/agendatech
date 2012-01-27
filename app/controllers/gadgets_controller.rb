@@ -7,6 +7,6 @@ class GadgetsController < ApplicationController
         respond_with @gadget
       else
         redirect_to '/auth/twitter'
-      end  
+      end
   end
 end

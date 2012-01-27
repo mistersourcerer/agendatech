@@ -2,9 +2,9 @@
 require 'image_twitter'
 
 class AuthenticationsController < ApplicationController
-  def index  
+  def index
     @authentications = current_user.authentications if current_user 
-  end  
+  end
 
   def create  
     omniauth = request.env["omniauth.auth"]  
