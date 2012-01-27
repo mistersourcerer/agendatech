@@ -169,13 +169,13 @@
             <div class="inner">
               <div class="left">
                 <%(1..6).each do |numero| %>
-                  <p><%= link_to "#{meses.index(numero)} (#{meses_com_total[numero]})"  , eventos_por_mes_path(:ano => Time.now.year, :month => "#{meses.index(numero)}") %></p>
+                  <p><%= link_to "#{meses.key(numero)} (#{meses_com_total[numero]})"  , eventos_por_mes_path(:ano => Time.now.year, :month => "#{meses.key(numero)}") %></p>
                 <%end%>
               </div>
 
               <div class="">
                 <%(7..12).each do |numero| %>
-                  <p><%= link_to "#{meses.index(numero)} (#{meses_com_total[numero]})"  , eventos_por_mes_path(:ano => Time.now.year, :month => "#{meses.index(numero)}") %></p>
+                  <p><%= link_to "#{meses.key(numero)} (#{meses_com_total[numero]})"  , eventos_por_mes_path(:ano => Time.now.year, :month => "#{meses.key(numero)}") %></p>
                 <%end%>
               </div>
             </div>
