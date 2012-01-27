@@ -3,6 +3,7 @@ gem "mysql2"
 gem 'rails', '~> 3.2.1'
 gem "paperclip"
 gem "twitter"
+gem "omniauth-twitter"
 gem "devise"
 gem "icalendar"
 gem "friendly_id"
