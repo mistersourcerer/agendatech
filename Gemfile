@@ -1,6 +1,6 @@
 source :rubygems
 gem "mysql2"
-gem 'rails', '~> 3.2.0'
+gem 'rails', '~> 3.2.1'
 gem "paperclip"
 gem "twitter"
 gem "devise"
