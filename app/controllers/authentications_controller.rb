@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'image_twitter'
 
 class AuthenticationsController < ApplicationController
@@ -26,16 +27,21 @@ class AuthenticationsController < ApplicationController
 
       # download user image
       Plugins.new_image_twitter.download omniauth['user_info']['nickname']
-      
-      flash[:notice] = "Signed in successfully."  
-      sign_in_and_redirect(:user, user)  
-    end 
-  end  
 
-  def destroy  
-    @authentication = current_user.authentications.find(params[:id])  
-    @authentication.destroy  
-    flash[:notice] = "Successfully destroyed authentication."  
-    redirect_to authentications_url 
+      flash[:notice] = "Signed in successfully."
+      sign_in_and_redirect(:user, user)
+    end
+  end
+
+  def destroy
+    @authentication = current_user.authentications.find(params[:id])
+    @authentication.destroy
+    flash[:notice] = "Successfully destroyed authentication."
+    redirect_to authentications_url
+  end
+
+  def failure
+    flash[:notice] = "Não foi possível autenticar."
+    redirect_to root_path
   end
 end
