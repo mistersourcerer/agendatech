@@ -1,3 +1,4 @@
+#encoding: utf-8
 class GruposController < ApplicationController
   def index
     @grupos = Grupo.por_nome.aprovados
@@ -13,7 +14,7 @@ class GruposController < ApplicationController
 
   def create
     @grupo = Grupo.new(params[:grupo])
-    
+
     if @grupo.save
       respond_to do |format|
         format.html do

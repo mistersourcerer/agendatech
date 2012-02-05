@@ -1,3 +1,4 @@
+#encoding: utf-8
 Dado /^que estou na pagina inicial$/ do
   visit "/"
 end

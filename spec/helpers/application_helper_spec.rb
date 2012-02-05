@@ -36,7 +36,11 @@ describe ApplicationHelper do
         helper.stub!(:params).and_return params
       end
       it("don't mark tab as selected") { should have_selector('a[class=menu_inicial]') }
+    end
 
+    context "using route method to create the \"url\" param" do
+      subject{ helper.tab_link_to("rss", feed_path("rss")) }
+      it("don't mark tab as selected") { should have_selector('a[class=menu_inicial]') }
     end
   end
 end

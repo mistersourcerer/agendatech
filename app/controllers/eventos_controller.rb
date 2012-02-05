@@ -1,3 +1,4 @@
+#encoding: utf-8
 class EventosController < ApplicationController
   uses_tiny_mce :only => [:new,:create]
 
@@ -6,7 +7,7 @@ class EventosController < ApplicationController
       @eventos = Evento.por_mes(numero_do_mes(params[:month])).top_gadgets
     else
       if params[:estado]
-        @eventos = Evento.por_estado(estados.index(params[:estado])).top_gadgets
+        @eventos = Evento.por_estado(estados.key(params[:estado])).top_gadgets
       else
         @eventos = Evento.que_ainda_vao_rolar
       end
