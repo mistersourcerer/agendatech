@@ -66,50 +66,7 @@
     </div>
     <div style="clear: both;"></div>
 
-<%=  flash[:comentario] %>
-<br />
-
-<% if @evento.comentarios.empty?%>
- <p>Seja o primeiro a comentar sobre esse evento!</p>
-        
-<% else  %>
-
-	<% for comentario in @evento.comentarios %>
-		<br/>
-		<div class="comentario">
-			<!-- <img src="/images/" /> -->
-			<div style="clear:both;"></div>
-	                
-                        <%= image_tag user_pic_by(comentario) %>
-
-			<p class="comentario_descricao"><%= comentario.descricao %></p>
-			<p class="comentario_data"><%= comentario.created_at.strftime("Enviado em %d/%m/%Y %I:%M%p") %></p>
-
-		</div>
-	<% end %>
-
-<% end %>
-
-<% if user_signed_in? %>
-<%= form_for @comentario, :url => {:action => "comentar"}, :html => { :class => 'resource_form' } do |f| %>
-	<input type="hidden" name="comentario[evento_id]" value="<%= @evento.id %>"/>
-	<input type="hidden" name="evento_nome" value="<%=@evento.to_param%>"/>
-	<p>
-		<textarea style="width: 600px; height: 100px;" type="text" name="comentario[descricao]"> </textarea>
-	</p>
-	<input style="position: static;" type="submit" value="Comentar"/>
-
-<% end  %>	
-<hr>
-<FORM>
-  <INPUT TYPE="BUTTON" VALUE="Voltar" class="botao" style="width: 100px;"
-            ONCLICK="window.location.href='<%= root_path %>'">
-</FORM>
-<% else %>
-  <br />
-  Para comentar faça o <%= link_to "login com seu twitter", "/auth/twitter", :class => 'blue' %>
-<% end %>
-
+	<div class="fb-comments" data-href="<%=request.url%>" data-num-posts="10" data-width="652"></div>
 
   </div>
 

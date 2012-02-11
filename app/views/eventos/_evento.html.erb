@@ -43,7 +43,7 @@
     <%= render 'shared/tweet_button', :text => "#{evento.nome} #agendatech", :url => evento_full_url(evento), :twitter => evento.twitter %>  </div>
   
   <div class="comments">
-    <%= link_to "#{evento.comentarios.size} comentarios", evento_full_path(evento) %> 
+    <%= link_to "Ver comentarios", evento_full_path(evento) %> 
   </div>
 
   <!-- ideia: badges! melhorar-->
