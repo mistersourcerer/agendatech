@@ -24,3 +24,7 @@ group :test do
   gem "database_cleaner", :require => false
   gem "capybara"
 end
+
+group :production do
+   gem "activerecord-postgresql-adapter"
+end
