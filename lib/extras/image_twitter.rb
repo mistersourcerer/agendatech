@@ -1,7 +1,7 @@
 require 'twitter'
 require 'open-uri'
 require 'find'
-require 'aws/s3'
+require 'aws-sdk'
 
 module ImageTwitterHelper
   def arquivo_para user_name
@@ -27,13 +27,18 @@ class ImageTwitter
 end
 
 class ImageTwitterInS3
-  include ImageTwitterHelper    
+  include ImageTwitterHelper      
   
-  def download user_name
+  def initialize
+  	@s3 = AWS::S3.new(
+      :access_key_id     => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET'])       
+  end
+  def download user_name  
     bucket = 'twitter_images'
     nome,url_da_imagem = arquivo_para user_name
-    unless AWS::S3::S3Object.exists? nome,bucket
-      AWS::S3::S3Object.store(nome,open(url_da_imagem),bucket,:access => :public_read)
+    image = @s3.buckets[bucket].objects[nome]
+    image.exists?
+      image.write(open(url_da_imagem),:acl => :public_read)
     end
-  end
 end

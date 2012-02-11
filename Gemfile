@@ -13,6 +13,7 @@ gem "omniauth"
 gem "aws-s3"
 gem "dalli"
 gem "enumerate_it"
+gem 'aws-sdk'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.6"
@@ -27,5 +28,4 @@ end
 
 group :production do
    gem "pg"
-   gem 'aws-sdk'
 end
