@@ -307,8 +307,7 @@
                 query2: 'select pic_square,uid from user where uid in (select fromid from #query1)'
               }
             },
-            function(response) {
-                console.log(response);     
+            function(response) {   
                 if(response.length > 0){                      
                   var comentarios = response[0].fql_result_set;
                   var comentarios_info = response[1].fql_result_set;
