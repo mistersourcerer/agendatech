@@ -142,21 +142,13 @@
             <div class="header">
               <p>Últimos comentários</p>              
             </div>
-            <div class="inner">
-
-              <% for comentario in @ultimos_comentarios %>
-                <div>
-                  
-                  <p class="comentario_descricao"><%= link_to comentario.descricao, evento_path(:ano => comentario.evento.data.year,:id=>comentario.evento) %></p>
-									<img src="/images/buble.gif" class="buble" />
-									
-									<%= image_tag user_pic_by(comentario) , :size => '25x25'%>
-									<p class="comentario_data"><%= comentario.created_at.strftime("Enviado em %d/%m/%Y %I:%M%p") %></p>
-                </div>
-                <br />
-              <% end %>
-
-
+            <div class="inner comentarios_fb">
+              <div style="display:none" id="comentario_usuario">
+                <p class="comentario_descricao">#descricao</p>
+								<img src="/images/buble.gif" class="buble"/>
+                <img src="#thumbUrl" width="25" heigth="25"/>
+								<p class="comentario_data">Enviado em #data</p>
+            </div>  
             </div>
           </div>
 
@@ -289,6 +281,8 @@
   <%= javascript_include_tag :defaults %>
 
   <%= javascript_include_tag 'jquery.tweet.min.js' %>
+  <%= javascript_include_tag 'underscore-min.js' %>  
+  <%= javascript_include_tag 'date.format.js' %>  
   <script type="text/javascript">
     !window.jQuery && document.write("<script type=\"text\/javascript\" src=\"javascripts\/jquery-1.4.4.min.js\"><\/script>");
     </script>
@@ -298,13 +292,42 @@
     <script type='text/javascript'>
       $(document).ready(function(){
           $(".tweet").tweet({
-username: "agendatech",
-join_text: "auto",
-avatar_size: 32,
-count: 1,
-loading_text: "carregando tweets..."
-});
+                username: "agendatech",
+                join_text: "auto",
+                avatar_size: 32,
+                count: 1,
+                loading_text: "carregando tweets..."
+                });
           });
+          FB.api(
+              {
+              method: 'fql.multiquery',
+              queries:{
+                query1: 'select text,fromid,time from comment where object_id in (select comments_fbid from link_stat where url in (<%=fb_urls_dos_eventos%>)) order by time desc limit 3',
+                query2: 'select pic_square,uid from user where uid in (select fromid from #query1)'
+              }
+            },
+            function(response) {
+                console.log(response);     
+                if(response.length > 0){                      
+                  var comentarios = response[0].fql_result_set;
+                  var comentarios_info = response[1].fql_result_set;
+                  for(i=0;i<comentarios.length;i++){
+                   var comentario = comentarios[i];                   
+                   var div = $("#comentario_usuario").html().replace("#descricao",comentario.text);
+                   
+                   var thumbUrl = _.find(comentarios_info, function(info){ return info.uid == comentario.fromid}).pic_square;                   
+                   div = div.replace("#thumbUrl",thumbUrl);
+                   
+                   var data = new Date(comentario.time*1000);
+                   div = div.replace("#data",data.format("dd/mm/yyyy"));               
+                   $(".comentarios_fb").append(div);
+                  }                      
+                }
+            }                
+          );  
+          
+          
 </script>
 <!-- Google Analytics -->
 <script type="text/javascript">
