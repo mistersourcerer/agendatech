@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>agendatech - Eventos de tecnologia</title>
+    <title>Agendatech - Eventos de tecnologia</title>
 
     <%= stylesheet_link_tag 'style' %>
     <%= stylesheet_link_tag 'form' %>
@@ -25,7 +25,7 @@
       <div class="container">
         <h1>
           <a href="/">
-            <p class="logo_home">agenda<span>tech</span></p>
+            <p class="logo_home">Agenda<span>tech</span></p>
           </a>
         </h1>
         <h3>Eventos de tecnologia no Brasil</h3>
@@ -34,7 +34,7 @@
           <div id="user_logged">
             Usuário: 
             <%= current_user.nickname %>, 
-            <%= link_to "Sair", destroy_user_session_path, :class => 'blue' %>
+            <%= link_to "Sair", destroy_user_session_path %>
           </div>
           <div style="clear:right"></div>
         <% end %>
@@ -45,7 +45,7 @@
         <ul>
           <% unless user_signed_in? %>
             <li>
-            <%= link_to "Login com twitter", "/auth/twitter", :class => 'blue' %>
+            <%= link_to "Login com twitter", "/auth/twitter" %>
             <span class="check"></span>
             </li>
           <% end %>
@@ -262,7 +262,7 @@
 
     <div class="container">
       <a href="/">
-        <p class="logo_footer">agenda<span>tech</span></p>
+        <p class="logo_footer">Agenda<span>tech</span></p>
       </a>
 
       <p><%= link_to "Home", :controller => 'eventos' %> |
