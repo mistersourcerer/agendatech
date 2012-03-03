@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
     Evento.joins(:gadgets).where("gadgets.user_id=?", self.id).where("gadgets.tipo=?", Gadget.tipos[:eu_vou]).ordenado_por_data
   end
 
-  def vai_no? evento
-    return Gadget.where(:evento_id => evento.id, :user_id => self.id).exists?
+  def tem_gadget? evento,tipo
+    return Gadget.where(:evento_id => evento.id, :user_id => self.id, :tipo => tipo.upcase).exists?
   end
+
 end

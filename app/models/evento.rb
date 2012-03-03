@@ -116,7 +116,7 @@ class GadgetDSL
     @gadgets = gadgets
   end
   
-  def method_missing(tipo, *args, &block)  
-     @gadgets.select {|gadget| gadget.tipo == Gadget.tipos[tipo]}       
+  def method_missing(nome_do_metodo, *args, &block)
+     @gadgets.select {|gadget| gadget.tipo.upcase == Gadget.tipos[nome_do_metodo].upcase}       
   end  
 end

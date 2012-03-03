@@ -75,15 +75,15 @@
             <div id="banner"></div>
           </a> -->
 					<div class="banner_quems">
-						<p>Quer ganhar um ingresso pra <strong>RubyConf Brazil 2011</strong>?</p>
+						<p>Quer ganhar um ingresso pra <strong>Encontro Locaweb em Salvador</strong>?</p>
 						<br/>
 						<hr>
 						<%= image_tag 'rubyconf.jpg' %><p class="sub">A RubyConf Brasil é a maior conferência com foco em Ruby da América do Sul e é comparável em tamanho às maiores conferências de tecnologia no continente e ocorrerá nos dias 3 e 4 de Novembro em São Paulo. Dia <strong>21/10 serão sorteados 4 ingressos</strong> entre aqueles que clicarem no botão abaixo!</p>
             <div style="clear: both;"></div>
-						<%= eu_vou @destaque, "Quero concorrer!", "Concorrendo!", "st_banner" %> <!--336-->            
+						<%= eu_vou @destaque, "Quero concorrer!", "Concorrendo!", "st_banner","promocao" %>
             <div style="clear: both;"></div>
 
-		                <% @destaque.me_da_gadgets.eu_vou.each do |gadget| %>
+		                <% @destaque.me_da_gadgets.promocao.each do |gadget| %>
                           <div class="quem_vai_pic">
                             <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
                           </div>

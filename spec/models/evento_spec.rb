@@ -10,8 +10,8 @@ describe Evento do
        @curso = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'SP',:aprovado => true,:tipo_evento => TipoEvento::CURSO       
        @evento_de_outro_ano = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => '10/10/2006', :estado => 'SP',:aprovado => true                                                             
        Gadget.create :tipo => Gadget.tipos[:eu_vou], :evento_id => @evento1.id, :user_id => 1
-       Gadget.create :tipo => 'teste1', :evento_id => @evento1.id, :user_id => 1
-       Gadget.create :tipo => 'teste2', :evento_id => @evento1.id, :user_id => 1
+       Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
+       Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
     end              
     
   
@@ -98,6 +98,10 @@ describe Evento do
   describe "gadgets associados" do 
       it "deveria pegar apenas os gadgets do tipo eu vou" do
         Evento.find_by_id(@evento1.id).me_da_gadgets.eu_vou.length.should eq(1)
+      end      
+      
+      it "deveria pegar apenas os gadgets do tipo promocao" do        
+        Evento.find_by_id(@evento1.id).me_da_gadgets.promocao.length.should eq(2)
       end      
   end
        

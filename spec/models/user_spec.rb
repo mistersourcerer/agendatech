@@ -9,12 +9,12 @@ describe Grupo do
     end
     
     it "deveria retornar false caso nao fosse" do
-      @user.vai_no?(@evento1).should be_false      
+      @user.tem_gadget?(@evento1,'eu_vou').should be_false      
     end
     
     it "deveria retornar true caso fosse" do
       Gadget.create :tipo => Gadget.tipos[:eu_vou], :evento_id => @evento1.id, :user_id => @user.id
-      @user.vai_no?(@evento1).should be_true      
+      @user.tem_gadget?(@evento1,'eu_vou').should be_true      
     end
 
     it "deveria retornar os eventos que vai ou foi" do

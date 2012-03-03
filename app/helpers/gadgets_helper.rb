@@ -1,21 +1,21 @@
 module GadgetsHelper
-  def eu_vou evento, nome = "Eu vou!", callback = "Confirmado!", st = ''
+  def eu_vou evento, nome = "Eu vou!", callback = "Confirmado!", st = '', tipo = 'eu_vou'
 
     content = "<div class='gadget_vou'>"
 
     if user_signed_in?
-      if current_user.vai_no? evento
+      if current_user.tem_gadget? evento,tipo
         content << link_to( callback, root_path, :class => 'ajax_vou_confirmado ' + st)
       else
-        content << link_to( nome, gadgets_path(:evento => evento.id, :tipo => Gadget.tipos[:eu_vou]), :class => 'ajax_vou ' + st, :id => "ajax_vou_#{evento.id}", :remote => true     )   
+        content << link_to( nome, gadgets_path(:evento => evento.id, :tipo => Gadget.tipos[tipo.to_sym]), :class => 'ajax_vou ' + st, :id => "ajax_vou_#{evento.id}", :remote => true     )   
       end  
     else
-      content << link_to( nome, gadgets_path(:evento => evento.id, :tipo => Gadget.tipos[:eu_vou]), :class => 'ajax_vou ' + st, :id => "ajax_vou_#{evento.id}"    )   
+      content << link_to( nome, gadgets_path(:evento => evento.id, :tipo => Gadget.tipos[tipo.to_sym]), :class => 'ajax_vou ' + st, :id => "ajax_vou_#{evento.id}"    )   
     end
 
     content << "</div>"
     content.html_safe
-  end
+  end  
 
   def user_name gadget
     User.find(gadget.user_id).nickname
