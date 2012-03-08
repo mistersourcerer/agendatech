@@ -9,7 +9,7 @@ class GadgetsController < ApplicationController
         @gadget = quase_um_gadget.associa current_user
         respond_with @gadget
       else
-        #session[:quase_um_gadget] = quase_um_gadget
+        session[:quase_um_gadget] = quase_um_gadget
         redirect_to '/auth/twitter'
       end
   end
