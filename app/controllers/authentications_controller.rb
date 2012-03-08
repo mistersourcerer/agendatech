@@ -7,9 +7,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def create  
-    omniauth = request.env["omniauth.auth"]  
+    omniauth = request.env["omniauth.auth"] 
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])  
- 
     # user is already registered
     if authentication  
       flash[:notice] = "Signed in successfully."  
@@ -21,12 +20,14 @@ class AuthenticationsController < ApplicationController
     # new user  
     else  
       # TODO : email must be unique in devise...
-      user = User.new :email => omniauth['user_info']['nickname'], :nickname => omniauth['user_info']['nickname'], :image => omniauth['user_info']['image'] 
+      info = omniauth['info']
+      user = User.new :email => info['nickname'], :nickname => info['nickname'], :image => info['image'] 
       user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
       user.save!       
             
+            
       # download user image
-      Plugins.new_image_twitter.download omniauth['user_info']['nickname']      
+      Plugins.new_image_twitter.download info['nickname']      
       flash[:notice] = "Signed in successfully."
       sign_in_and_redirect(:user, user)
     end    
