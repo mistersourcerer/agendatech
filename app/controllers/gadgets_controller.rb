@@ -4,7 +4,7 @@ class GadgetsController < ApplicationController
   def create
       evento = Evento.find(params[:evento])
       tipo = params[:tipo]
-      quase_um_gadget = QuaseUmGadget.new(evento,tipo)
+      quase_um_gadget = QuaseUmGadget.new(evento.id,tipo)
       if user_signed_in?
         @gadget = quase_um_gadget.associa current_user
         respond_with @gadget
