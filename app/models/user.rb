@@ -23,8 +23,13 @@ class User < ActiveRecord::Base
     Evento.joins(:gadgets).where("gadgets.user_id=?", self.id).where("gadgets.tipo=?", Gadget.tipos[:eu_vou]).ordenado_por_data
   end
 
+  #refatorar essa parte para uma classe gadgets
   def tem_gadget? evento,tipo
-    return Gadget.where(:evento_id => evento.id, :user_id => self.id, :tipo => tipo.upcase).exists?
+    Gadget.where(:evento_id => evento.id, :user_id => self.id, :tipo => tipo.upcase).exists?
+  end
+  
+  def gadget_para evento,tipo
+    Gadget.where(:evento_id => evento.id, :user_id => self.id, :tipo => tipo.upcase).first
   end
 
 end

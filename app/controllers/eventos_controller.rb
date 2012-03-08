@@ -1,8 +1,21 @@
 #encoding: utf-8
 class EventosController < ApplicationController
   uses_tiny_mce :only => [:new,:create]
+  
+  private
+  
+  def tenta_marcar_gadget
+    if session[:quase_um_gadget] && current_user
+      quase_um_gadget = session[:quase_um_gadget]
+      quase_um_gadget.associa current_user
+      session[:quase_um_gadget] = nil
+    end    
+  end
+  
+  public
 
   def index
+    tenta_marcar_gadget
     if params[:month]
       @eventos = Evento.por_mes(numero_do_mes(params[:month])).top_gadgets
     else
@@ -47,18 +60,6 @@ class EventosController < ApplicationController
     @tag = params[:id]
     render :action => "index"
   end
-
-  def comentar
-    @comentario = Comentario.new(params[:comentario])
-    @comentario.twitter = current_user.nickname
-    if @comentario.save
-      flash[:comentario] = "Comentário cadastrado com sucesso!"      
-      @evento = Evento.find_by_cached_slug(params[:evento_nome])
-      redirect_to evento_path(:ano => @evento.data.year,:id=>@evento)
-    else
-      render :action => "new"
-    end
-  end
   
   def lista
     @participantes = []
@@ -72,8 +73,4 @@ class EventosController < ApplicationController
     end
   end
   
-  def facebook
-    # testing facebook app
-  end
-
 end
