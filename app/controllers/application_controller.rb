@@ -99,7 +99,6 @@ class ApplicationController < ActionController::Base
   end
 
   def evento_destaque
-    #mangueziho para ajustar o banner da qcon TODO retirar...
     @destaque = Evento.where(:destaque => true).first
   end
 

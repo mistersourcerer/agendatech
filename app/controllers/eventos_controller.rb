@@ -24,7 +24,7 @@ class EventosController < ApplicationController
       else
         @eventos = Evento.que_ainda_vao_rolar
       end
-    end    
+    end
   end
   
   def cursos
