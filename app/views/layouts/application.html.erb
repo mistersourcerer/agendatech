@@ -83,7 +83,7 @@
                 <%= link_to image_tag(banner.nome_imagem), evento_full_path(banner.evento) %>
                 <p class="sub"><%=banner.descricao.html_safe%></p>
                 <div style="clear: both;"></div>
-    						<%= eu_vou banner.evento, "Eu vou!", "Confirmado!", "st_banner",banner.tipo_gadget_associado %>
+    						<%= eu_vou banner.evento, banner.gadget_info[:label], banner.gadget_info[:label_confirmacao], "st_banner",banner.tipo_gadget_associado %>
                 <div style="clear: both;"></div>
 
     		                <% banner.evento.me_da_gadgets.do_tipo(banner.tipo_gadget_associado).each do |gadget| %>

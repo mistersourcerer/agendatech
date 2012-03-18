@@ -11,4 +11,8 @@ class Banner < ActiveRecord::Base
   end 
   
   extend WithQueries
+  
+  def gadget_info
+    Gadget.tipos[self.tipo_gadget_associado.downcase.to_sym]
+  end
 end
