@@ -6,7 +6,7 @@ class CreateBanners < ActiveRecord::Migration
       t.integer :ordem
       t.string  :tipo_gadget_associado,:default => Gadget.tipos[:eu_vou][:nome]
       t.string  :nome_imagem
-      t.string  :descricao
+      t.text  :descricao
       t.string  :titulo
       t.timestamps
     end
