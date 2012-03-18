@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.datetime "logo_updated_at"
     t.string   "estado"
     t.datetime "data_termino"
-    t.integer  "grupo_id"
     t.string   "cached_slug"
+    t.integer  "grupo_id"
     t.integer  "call_4_paperz_id"
     t.string   "tipo_evento",       :default => "Evento"
     t.boolean  "destaque",          :default => false
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.string   "image"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

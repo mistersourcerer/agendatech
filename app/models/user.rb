@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   extend Scopes
 
   def eventos_que_vai_ou_foi
-    Evento.joins(:gadgets).where("gadgets.user_id=?", self.id).where("gadgets.tipo=?", Gadget.tipos[:eu_vou]).ordenado_por_data
+    Evento.joins(:gadgets).where("gadgets.user_id=?", self.id).where("gadgets.tipo=?", Gadget.tipos[:eu_vou][:nome]).ordenado_por_data
   end
 
   #refatorar essa parte para uma classe gadgets

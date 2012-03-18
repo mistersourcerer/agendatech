@@ -6,5 +6,9 @@ class Gadget < ActiveRecord::Base
     {:eu_vou => {:nome => 'EU_VOU',:label => 'Eu vou!',:label_confirmacao => 'Confirmado!'},
      :promocao => {:nome => 'PROMOCAO',:label => 'Concorrer!',:label_confirmacao => 'Confirmado!'}
     }
+  end
+  
+  def self.busca_por_tipo tipo
+    Gadget.tipos[tipo.downcase.to_sym]
   end    
 end

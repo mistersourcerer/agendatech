@@ -117,7 +117,7 @@ class GadgetDSL
   end
   
   def do_tipo(tipo)
-    @gadgets.select {|gadget| gadget.tipo.upcase == Gadget.tipos[tipo.downcase.to_sym][:nome].upcase}       
+    @gadgets.select {|gadget| gadget.tipo.upcase == Gadget.busca_por_tipo(tipo)[:nome].upcase}       
   end
   
   def method_missing(nome_do_metodo, *args, &block)

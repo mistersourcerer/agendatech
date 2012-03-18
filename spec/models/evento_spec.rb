@@ -9,7 +9,7 @@ describe Evento do
        @evento3 = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'SP',:aprovado => true
        @curso = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'SP',:aprovado => true,:tipo_evento => TipoEvento::CURSO       
        @evento_de_outro_ano = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => '10/10/2006', :estado => 'SP',:aprovado => true                                                             
-       Gadget.create :tipo => Gadget.tipos[:eu_vou], :evento_id => @evento1.id, :user_id => 1
+       Gadget.create :tipo => Gadget.tipos[:eu_vou][:nome], :evento_id => @evento1.id, :user_id => 1
        Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
        Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
     end              

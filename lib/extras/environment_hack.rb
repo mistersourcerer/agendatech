@@ -1,4 +1,4 @@
-class EnvironmentHack
+class EnvironmentHack  
 
   def self.para
     yield EnvironmentHack.new

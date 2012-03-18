@@ -5,11 +5,4 @@ describe Plugins do
       obj = Plugins.new_image_twitter
       obj.class.should eq ImageTwitter
   end
-  
-  it "deveria retornar o ImageTwitter para s3 em prod" do
-    Rails.env  = 'production'
-    obj = Plugins.new_image_twitter
-    obj.class.should eq ImageTwitterInS3
-    Rails.env  = 'test'    
-  end
 end
