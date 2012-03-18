@@ -70,30 +70,31 @@
           <p class="notice"><%=flash[:aguarde]%></p>
         <% end  %>
 				
-				<% if @eventos && @destaque%>
+				
           <!-- <a href="http://www.rubyconf.com.br/" target="_blank">
             <div id="banner"></div>
           </a> -->
-					<div class="banner_quems">
-						<p>Quem vai na <strong>QCon</strong>:</p>
-						<br/>
-						<hr>
+          <%@banners.each do |banner|%>
+    					<div class="banner_quems">
+    						<p><%=banner.titulo.html_safe%></p>
+    						<br/>
+    						<hr>
 
-            <%= link_to image_tag('banner_pequeno_qcon.png'), evento_full_path(@destaque) %><p class="sub">A Caelum e o InfoQ organizam pela terceira vez
-						  o principal evento de arquitetos e desenvolvedores do mundo.
-						  O QCON SP traz nos dias <strong>04/08 e 05/08 </strong> ícones internacionais e nacionais de diversas áreas, com apresentações de alto nível técnico.</p>
-            <div style="clear: both;"></div>
-						<%= eu_vou @destaque, "Eu vou!", "Confirmado!", "st_banner","eu_vou" %>
-            <div style="clear: both;"></div>
+                <%= link_to image_tag(banner.nome_imagem), evento_full_path(banner.evento) %>
+                <p class="sub"><%=banner.descricao.html_safe%></p>
+                <div style="clear: both;"></div>
+    						<%= eu_vou banner.evento, "Eu vou!", "Confirmado!", "st_banner",banner.tipo_gadget_associado %>
+                <div style="clear: both;"></div>
 
-		                <% @destaque.me_da_gadgets.eu_vou.each do |gadget| %>
-                          <div class="quem_vai_pic">
-                            <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
-                          </div>
-		                <%end%>
+    		                <% banner.evento.me_da_gadgets.do_tipo(banner.tipo_gadget_associado).each do |gadget| %>
+                              <div class="quem_vai_pic">
+                                <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
+                              </div>
+    		                <%end%>
             
-		            </div>
-				<% end %>
+    		        </div>
+    		   <%end%>
+				
 					
 
         <div id="left" >

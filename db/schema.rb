@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722124034) do
+ActiveRecord::Schema.define(:version => 20120317220934) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20110722124034) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "banners", :force => true do |t|
+    t.integer  "evento_id"
+    t.boolean  "liberado",              :default => false
+    t.integer  "ordem"
+    t.string   "tipo_gadget_associado", :default => "EU_VOU"
+    t.string   "nome_imagem"
+    t.string   "descricao"
+    t.string   "titulo"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   create_table "comentarios", :force => true do |t|

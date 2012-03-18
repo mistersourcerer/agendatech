@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
   end
 
   def evento_destaque
-    @destaque = Evento.where(:destaque => true).first
+    @banners = Banner.liberados
   end
 
 
