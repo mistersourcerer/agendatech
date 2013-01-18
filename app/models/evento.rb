@@ -40,6 +40,12 @@ class Evento < ActiveRecord::Base
     self.update_attributes(:aprovado => true)
   end
   
+  def aprova_como_curso!
+    self.aprovado = true
+    self.update_attributes(:aprovado => true,:tipo_evento => TipoEvento::CURSO)
+  end
+  
+  
       
   module Scopes
     
