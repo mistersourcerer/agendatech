@@ -35,6 +35,11 @@ class Evento < ActiveRecord::Base
     end
   public
   
+  def aprova!
+    self.aprovado = true
+    self.update_attributes(:aprovado => true)
+  end
+  
       
   module Scopes
     
