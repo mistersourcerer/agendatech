@@ -2,7 +2,7 @@ source :rubygems
 gem "mysql2"
 gem 'rails', '~> 3.2.1'
 gem "paperclip"
-gem "twitter"
+gem "twitter", "4.5.0"
 gem "omniauth-twitter"
 gem "devise"
 gem "icalendar"
