@@ -199,6 +199,7 @@ DEPENDENCIES
   friendly_id
   icalendar
   mysql2
+  nokogiri (= 1.5.4)
   omniauth
   omniauth-twitter
   paperclip
