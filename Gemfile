@@ -2,7 +2,7 @@ source :rubygems
 gem "mysql2"
 gem 'rails', '~> 3.2.1'
 gem "paperclip"
-gem "twitter"
+gem "twitter", "4.5.0"
 gem "omniauth-twitter"
 gem "devise"
 gem "icalendar"
@@ -14,6 +14,7 @@ gem "aws-s3"
 gem "dalli"
 gem "enumerate_it"
 gem 'aws-sdk'
+gem "nokogiri", "1.5.4" #dependencia indireta na versão que não buga no Ubuntu 
 
 group :development, :test do
   gem "rspec-rails", "~> 2.6"

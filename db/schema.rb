@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -25,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -36,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "banners", :force => true do |t|
@@ -56,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.string   "twitter"
     t.text     "descricao"
     t.integer  "evento_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "eventos", :force => true do |t|
@@ -68,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.string   "twitter_hash"
     t.boolean  "aprovado"
     t.datetime "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -89,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.string   "tipo"
     t.integer  "evento_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "grupos", :force => true do |t|
@@ -100,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "site"
   end
 
@@ -136,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -145,8 +143,8 @@ ActiveRecord::Schema.define(:version => 20120317220934) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "nickname"
     t.string   "image"
   end
