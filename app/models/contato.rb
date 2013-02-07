@@ -1,4 +1,4 @@
-class Contato
+class Contato < ActiveRecord::Base
   attr_accessor :nome, :email, :mensagem
   
   def initialize (hash)

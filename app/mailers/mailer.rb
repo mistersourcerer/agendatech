@@ -10,4 +10,9 @@ class Mailer < ActionMailer::Base
     @grupo = grupo
     mail(:to => Agendatech.mailer_to, :subject => "Novo grupo #{@grupo.nome} cadastrado")
   end
+
+  def email_de_contato(contato)
+    @contato = contato
+    mail(:to => Agendatech.mailer_to, :subject => "Contato agendatech")
+  end
 end
