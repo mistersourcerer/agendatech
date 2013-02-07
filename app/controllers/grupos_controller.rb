@@ -24,6 +24,7 @@ class GruposController < ApplicationController
     if @grupo.save
       respond_to do |format|
         format.html do
+          Mailer.email_de_criacao_de_grupo(@grupo).deliver
           flash[:aguarde] = 'Grupo registrado com sucesso. Seu grupo estará disponível em instantes.'
           redirect_to root_path
         end

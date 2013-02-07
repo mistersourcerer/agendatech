@@ -40,6 +40,7 @@ module Agendatech
     config.filter_parameters += [:password, :password_confirmation]
 
     config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_url_options = {:host => ENV['MAILER_HOST'] || "localhost:3000"}
     
     config.action_mailer.smtp_settings = {
       :address              => "smtp.gmail.com",

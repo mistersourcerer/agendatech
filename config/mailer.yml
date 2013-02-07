@@ -1,0 +1,14 @@
+test:
+  approve:
+    to: ["andersonlfl@gmail.com", "alots.ssa@gmail.com"]
+    from: ["contato@agendatech.com.br"]
+
+development:
+  approve:
+    to: ["andersonlfl@gmail.com", "alots.ssa@gmail.com"]
+    from: ["contato@agendatech.com.br"]
+
+production:
+  approve:
+    to: ["andersonlfl@gmail.com", "alots.ssa@gmail.com"]
+    from: ["contato@agendatech.com.br"]
