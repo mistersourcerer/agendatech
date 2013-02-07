@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Admin, </h1>
+    <p>
+      Foi criado o grupo <strong><%= @grupo.nome %></strong>
+      no agendatech.<br/>
+    </p>
+    <p>
+      Site: <%= raw @grupo.site %>
+    </p>
+    <p>
+      Para aprovar o evento, por favor clique no link: 
+      <%= link_to "Aprovar", url_for(:action => "aprovar", :controller => "admin/grupos", :only_path => false, :id => @grupo) %>.
+    </p>
+    <p>Obrigado!</p>
+  </body>
+</html>
