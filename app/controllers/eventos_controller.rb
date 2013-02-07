@@ -43,7 +43,7 @@ class EventosController < ApplicationController
       @evento.data_termino = @evento.data
     end
     if @evento.save
-      EventoMailer.email_de_criacao_de_evento(@evento).deliver
+      Mailer.email_de_criacao_de_evento(@evento).deliver
       flash[:aguarde] = "Obrigado! Seu evento aparecerá na lista em instantes!"
       redirect_to :action => "index"
     else
