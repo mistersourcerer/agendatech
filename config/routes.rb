@@ -36,7 +36,7 @@ Agendatech::Application.routes.draw do
   match 'facebook' => 'sobre#facebook', :as => :facebook  
   match 'mobile/eventos' => 'mobile#eventos', :format  => :json
   match 'mobile/grupos' => 'mobile#grupos', :format  => :json  
-  match 'contato' => 'notifier#index', :as => :contato
+  match 'contato' => 'contato#index', :as => :contato
   match 'sobre' => 'sobre#index', :as => :sobre
   match 'calendario' => 'calendario#links', :as => :calendario_link
   match 'eventos/tecnologia/:ano/:id' => 'eventos#show', :as => :evento

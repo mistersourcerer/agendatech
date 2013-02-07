@@ -23,5 +23,12 @@ describe Mailer do
     ActionMailer::Base.deliveries.should_not be_empty
     email.from.should eql Agendatech.mailer_from
     email.to.should eql Agendatech.mailer_to
-  end  
+  end
+
+  fixtures(:contatos)
+  it "deveria enviar um email" do
+    contato = contatos(:albie)
+    email = Mailer.email_de_contato(contato).deliver
+    ActionMailer::Base.deliveries.empty?.should be_false
+  end
 end
