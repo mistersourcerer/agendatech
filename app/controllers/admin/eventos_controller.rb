@@ -29,15 +29,15 @@ class Admin::EventosController < ApplicationController
   end
 
   def aprovar
-    @evento = Evento.find_by_cached_slug(params[:id])
-    @evento.aprova!
+    evento = Evento.find_by_cached_slug(params[:id])
+    evento.aprova!
     flash[:notice] = "Evento aprovado."
     redirect_to :action => 'index'
   end
 
   def desaprovar
-    @evento = Evento.find_by_cached_slug(params[:id])
-    @evento.desaprova!
+    evento = Evento.find_by_cached_slug(params[:id])
+    evento.desaprova!
     flash[:notice] = "Evento desaprovado."
     redirect_to :action => 'index'
   end
