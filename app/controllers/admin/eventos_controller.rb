@@ -43,7 +43,8 @@ class Admin::EventosController < ApplicationController
   end
 
   def remover
-    Evento.destroy params[:id]
+    evento = Evento.find_by_cached_slug(params[:id])
+    evento.delete
     flash[:notice] = "Evento removido."
     redirect_to :action => 'index'
   end
