@@ -1,5 +1,4 @@
 <div class="evento clearfix" id="evento_<%= evento.id %>">
-
   <div class="data">
     <%if evento.ta_rolando? %>
       <p><%= Date.today.day %></p>
@@ -12,11 +11,11 @@
 
   <% if evento.logo? %>
     <div class="logo_img clearfix">
-    <%= image_tag evento.logo.url(:thumb) %> 
+      <%= image_tag evento.logo.url(:thumb) %> 
     </div>
   <% else %>  
-  <div class="logo clearfix">  </div>
-<% end %>
+    <div class="logo clearfix">  </div>
+  <% end %>
 
   <div class="info">
     <p id="evento"><%= link_to evento.nome, evento_full_path(evento) %></p>
@@ -40,7 +39,8 @@
       </div>
     </div>
     <%= eu_vou evento %>
-    <%= render 'shared/tweet_button', :text => "#{evento.nome} #agendatech", :url => evento_full_url(evento), :twitter => evento.twitter %>  </div>
+    <%= render 'shared/tweet_button', :text => "#{evento.nome} #agendatech", :url => evento_full_url(evento), :twitter => evento.twitter %>
+  </div>
   
   <div class="comments">
     <%= link_to "Ver comentarios", evento_full_path(evento) %> 

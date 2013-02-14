@@ -12,40 +12,32 @@
   <% if @evento.logo? %>
   <div class="logo_img clearfix"> <%= image_tag @evento.logo.url(:thumb) %> </div>
   <% else%>
-      <div class="logo clearfix">
-        
-      </div>
+    <div class="logo clearfix"></div>
   <% end %>
-
 
   <div class="info">
     <p id="evento"><%= link_to @evento.nome, evento_full_path(@evento) %></p>
     <small><%= nome_do_estado @evento.estado %></small><br/>
 
     <p><span>Data:</span><%= @evento.data.day %>/<%= l(@evento.data, :format => :month) %></p>
-	<small><%= evento_do @evento.grupo %></small>
-        <br/><br/>
+    <small><%= evento_do @evento.grupo %></small>
+    <br/><br/>
 
-	<p><span>Tags:</span>
+    <p><span>Tags:</span>
+      <% @evento.tags.each do |tag| %>
+        <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => "tag tags" %>
+      <% end %>
+    </p>
 
-			<% @evento.tags.each do |tag| %>
-			<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => "tag tags" %>
-			<% end %>
+    <p><span>Site:</span><a href="<%= @evento.site %>" target="blank"><%= @evento.site %></a></p>
+    <p><span>Twitter:</span><a href="http://www.twitter.com/<%= @evento.twitter %>" target="blank">@<%= @evento.twitter %></a></p>
+    <p><span><%= link_to 'Gerar lista de participantes', participantes_path(:id => @evento) %></span></p>
 
-	</p>
+    <div id="detalhe_desc" >
+      <%= @evento.descricao.html_safe %>
+    </div>
 
-	<p><span>Site:</span><a href="<%= @evento.site %>" target="blank"><%= @evento.site %></a></p>
-	<p><span>Twitter:</span><a href="http://www.twitter.com/<%= @evento.twitter %>" target="blank">@<%= @evento.twitter %></a></p>
-  <p><span><%= link_to 'Gerar lista de participantes', participantes_path(:id => @evento) %></span></p>
-
-<div id="detalhe_desc" >
-	<%= @evento.descricao.html_safe %>
-</div>
-
-   
     <div class="separador"></div>
-
-
     <div class="quem_vai" id="quem_vai_<%= @evento.id %>">
       <div class="quem_vai_pics">
         <div class="spinner">
@@ -53,24 +45,16 @@
         </div>
         <% @evento.me_da_gadgets.eu_vou.each do |gadget| %>
           <div class="quem_vai_pic"> 
-            <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
+            <%= link_to (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
           </div>
-        <%end%>
-        
+        <%end%>   
       </div>
     </div>
-
-      <%= eu_vou @evento %>
-
-
-    </div>
-    <div style="clear: both;"></div>
-
-	<div class="fb-comments" data-href="<%=request.url%>" data-num-posts="10" data-width="652"></div>
-
+    <%= eu_vou @evento %>
   </div>
-
+  <div style="clear: both;"></div>
+  <div class="fb-comments" data-href="<%=request.url%>" data-num-posts="10" data-width="652"></div>
+</div>
 <br>
-
 
 <%= render :partial => 'eventoajax' %>

@@ -1,4 +1,7 @@
 class Admin::EventosController < ApplicationController
+  require "rubygems"
+  require "twitter"
+
   before_filter :authenticate_admin!
   uses_tiny_mce :only => [:editar]
 
@@ -31,6 +34,8 @@ class Admin::EventosController < ApplicationController
   def aprovar
     evento = Evento.find_by_cached_slug(params[:id])
     evento.aprova!
+    twitter = Twitter::Client.new
+    twitter.update("Novo evento #{evento.nome} - #{evento.estado} - #{evento.data} - #{evento.site}")
     flash[:notice] = "Evento aprovado."
     redirect_to :action => 'index'
   end
@@ -48,5 +53,4 @@ class Admin::EventosController < ApplicationController
     flash[:notice] = "Evento removido."
     redirect_to :action => 'index'
   end
-
 end
