@@ -1,61 +1,57 @@
 <div id="userInfo" class="grayBox">
-            <div class="pic"><%= link_to (image_tag link_da_imagem_do_twitter_para("#{@usuario.nickname}.#{image_extension @usuario.image}")), "http://www.twitter.com/#{@usuario.nickname}",:target => :blank %></div>
-            <div class="data">
-              <h1><%= @usuario.nickname %></h1>
-              <!--h2>São Paulo, Brasil</h2-->
-              
-            
-              <div class="links">
-                <a target="_blank" rel="me" href="http://twitter.com/<%= @usuario.nickname%>"><img src="/images/twitterBox.png"></a>
-              </div>
-              
-              <div class="separator"></div>
-              <ul class="translate">
-                <li style="width: 110px; padding-left: 8px;">
-                  EVENTOS <strong style="left: 7px;" class="notranslate"><%=  @usuario.eventos_que_vai_ou_foi.size%></strong>
-                </li>
-                <li style="width: 130px;">
-                  COMENTÁRIOS<strong class="notranslate"><%= @comentarios.size %></strong>
-                  </li>
-                <!--li style="width: 100px; border-right: medium none;">
-                  THINGS DONE <strong class="notranslate">7</strong>
-                </li-->
-              </ul>
-            </div>
-          </div>
+  <div class="pic"><%= link_to (image_tag link_da_imagem_do_twitter_para("#{@usuario.nickname}.#{image_extension @usuario.image}")), "http://www.twitter.com/#{@usuario.nickname}",:target => :blank %></div>
+  <div class="data">
+    <h1><%= @usuario.nickname %></h1>
+    <!--h2>São Paulo, Brasil</h2-->         
+    <div class="links">
+      <a target="_blank" rel="me" href="http://twitter.com/<%= @usuario.nickname%>"><img src="/images/twitterBox.png"></a>
+    </div>
 
-					<div class="atividades_box">
-						<div class="atividades_head">Eventos que compareceu</div>
-		          	<% @usuario.eventos_que_vai_ou_foi.each do |evento| %>
-									<div class="atividades_list">
-										
-										<% if evento.logo? %>
-									  	<%= image_tag evento.logo.url(:thumb), :size => "20x20", :class => "venue" %>
-									  <% else%>
-									  	<%= image_tag 'empty.gif', :size => "20x20", :class => "venue" %>
-									  <% end %>
-										
-				            <p><a href="<%= evento.nome %>"><%= evento.nome %></a></p>
-										<p><span><%= evento.data.strftime("%d/%m/%Y") %></span></p>
-									</div>
-		          	<% end %>
-          </div>
+    <div class="separator"></div>
+    <ul class="translate">
+      <li style="width: 110px; padding-left: 8px;">
+        EVENTOS <strong style="left: 7px;" class="notranslate"><%=  @usuario.eventos_que_vai_ou_foi.size%></strong>
+      </li>
+      <li style="width: 130px;">
+        COMENTÁRIOS<strong class="notranslate"><%= @comentarios.size %></strong>
+      </li>
+      <!--li style="width: 100px; border-right: medium none;">
+        THINGS DONE <strong class="notranslate">7</strong>
+      </li-->
+    </ul>
+  </div>
+</div>
 
-					<div class="atividades_box">
-						<div class="atividades_head">Comentários</div>
-			          <% if @comentarios.empty? %>
-										<div class="atividades_list">
-											<%= image_tag 'quotes.png', :class => "quote" %>
-				            	<p>Nenhum comentário até o momento.</p><br/>
-				            	<p><span>agendatech</span></p>
-										</div>
-								<% else %>
-									<% @comentarios.each do |comentario| %>
-										<div class="atividades_list">
-											<%= image_tag 'quotes.png', :class => "quote" %>
-				            	<p><%= comentario.descricao %></p><br/>
-				            	<p><span><%= comentario.evento.nome %></span></p>
-										</div>
-				          <% end %>
-								<% end %>
-          </div>
+<div class="atividades_box">
+  <div class="atividades_head">Eventos que compareceu</div>
+  <% @usuario.eventos_que_vai_ou_foi.each do |evento| %>
+    <div class="atividades_list">
+      <% if evento.logo? %>
+        <%= image_tag evento.logo.url(:thumb), :size => "20x20", :class => "venue" %>
+      <% else%>
+        <%= image_tag 'empty.gif', :size => "20x20", :class => "venue" %>
+      <% end %>
+      <p><a href="<%= evento.nome %>"><%= evento.nome %></a></p>
+      <p><span><%= evento.data.strftime("%d/%m/%Y") %></span></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="atividades_box">
+  <div class="atividades_head">Comentários</div>
+  <% if @comentarios.empty? %>
+    <div class="atividades_list">
+      <%= image_tag 'quotes.png', :class => "quote" %>
+      <p>Nenhum comentário até o momento.</p><br/>
+      <p><span>agendatech</span></p>
+    </div>
+  <% else %>
+    <% @comentarios.each do |comentario| %>
+      <div class="atividades_list">
+        <%= image_tag 'quotes.png', :class => "quote" %>
+        <p><%= comentario.descricao %></p><br/>
+        <p><span><%= comentario.evento.nome %></span></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

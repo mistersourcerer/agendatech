@@ -25,7 +25,6 @@ class AuthenticationsController < ApplicationController
       user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
       user.save!       
             
-            
       # download user image
       Plugins.new_image_twitter.download info['nickname']      
       flash[:notice] = "Signed in successfully."
