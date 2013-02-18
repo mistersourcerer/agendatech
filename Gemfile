@@ -18,6 +18,7 @@ gem "nokogiri", "1.5.4" #dependencia indireta na versão que não buga no Ubuntu
 
 group :development, :test do
   gem "rspec-rails", "~> 2.6"
+  gem "pry-rails"
 end
 
 group :test do
