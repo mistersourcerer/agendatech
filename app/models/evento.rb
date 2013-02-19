@@ -2,38 +2,58 @@
 class Evento < ActiveRecord::Base
   extend FriendlyId
 
+  attr_accessible :nome, :descricao, :site, :data, :estado, :aprovado
+
   has_many :comentarios
-  has_many :gadgets, :order => 'id desc'
+  has_many :gadgets, -> { order 'id desc' }
   belongs_to :grupo
+
   has_enumeration_for :tipo_evento, :with => TipoEvento, :create_helpers => true, :create_scopes => true
 
   acts_as_taggable
   friendly_id :nome, :use => :slugged, :slug_column => "cached_slug"
+
   Plugins.paper_clip self
 
-  validates_presence_of   :nome, :site, :descricao, :message => "Campo obrigatório"
-  validates_date :data,:format=>"dd/mm/yyyy", :invalid_date_message => "Formato inválido", :if => Proc.new { |evento| !evento.aprovado }
-  validates_date :data_termino,:format=>"dd/mm/yyyy", :invalid_date_message => "Formato inválido", :allow_blank => true, :if => Proc.new { |evento| !evento.aprovado}
-  validate :termino_depois_do_inicio?,:if => Proc.new { |evento| !evento.aprovado }
-  validates_format_of :site, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  validates_presence_of :nome, :site, :descricao, :message => "Campo obrigatório"
 
-  scope :nao_ocorrido, where("aprovado = ? AND ((? between data and data_termino) OR (data >= ?))",true, Date.today,Date.today)
+  validates_date :data,
+      format: "dd/mm/yyyy",
+      invalid_date_message: "Formato inválido",
+      if: Proc.new { |evento| !evento.aprovado }
 
-  scope :aprovado, where("aprovado = ?",true)
+  validates_date :data_termino,
+    format: "dd/mm/yyyy",
+    invalid_date_message: "Formato inválido",
+    allow_blank: true,
+    if: Proc.new { |evento| !evento.aprovado}
 
-  scope :ordenado_por_data, order('data asc')
+  validate :termino_depois_do_inicio?,
+    if: Proc.new { |evento| !evento.aprovado }
 
-  scope :top_gadgets, includes(:gadgets)
+  validates_format_of :site,
+    with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 
-  scope :para_o_ano, lambda {|ano| where("#{SQL.ano_do_evento} >= ?",ano)}
+  def self.nao_ocorrido
+    cond = "aprovado = ? AND ((? between data and data_termino) OR (data >= ?))"
+    data = Date.today
+    where cond, true, data, data
+  end
+
+  scope :aprovado, -> { where "aprovado = ?", true }
+
+  scope :ordenado_por_data, -> { order 'data asc' }
+
+  scope :top_gadgets, -> { includes :gadgets }
+
+  scope :para_o_ano, lambda { |ano| where "#{SQL.ano_do_evento} >= ?", ano }
 
   before_save :verifica_tipo
 
-  private
-    def verifica_tipo
-      self.tipo_evento = TipoEvento::CONFERENCIA unless self.tipo_evento
-    end
-  public
+  def verifica_tipo
+    self.tipo_evento = TipoEvento::CONFERENCIA unless self.tipo_evento
+  end
+  private :verifica_tipo
 
   def aprova!
     self.aprovado = true
@@ -50,8 +70,6 @@ class Evento < ActiveRecord::Base
     self.update_attributes(:aprovado => true,:tipo_evento => TipoEvento::CURSO)
   end
 
-
-
   module Scopes
 
     def que_ainda_vao_rolar(tipo=TipoEvento::CONFERENCIA)
@@ -63,7 +81,12 @@ class Evento < ActiveRecord::Base
     end
 
     def agrupado_por_mes(ano = Time.now.year,tipo=TipoEvento::CONFERENCIA)
-      por_tipo(tipo).group("#{SQL.mes_do_evento}").aprovado.para_o_ano(ano).order("#{SQL.mes_do_evento} asc").count
+      por_tipo(tipo).
+        group("#{SQL.mes_do_evento}").
+        aprovado.
+        para_o_ano(ano).
+        order("#{SQL.mes_do_evento} asc").
+        count
     end
 
     def ultimos_twitados(tipo=TipoEvento::CONFERENCIA)
@@ -78,10 +101,10 @@ class Evento < ActiveRecord::Base
       por_tipo(tipo).where("#{SQL.mes_do_evento} = ? ", mes).aprovado.para_o_ano(ano).ordenado_por_data
     end
 
-    private
     def por_tipo(tipo = TipoEvento::CONFERENCIA)
-      where("tipo_evento = ?",tipo.humanize)
+      where("tipo_evento = ?", tipo.humanize)
     end
+    private :por_tipo
   end
 
   extend Scopes
@@ -95,8 +118,6 @@ class Evento < ActiveRecord::Base
             }
           }
   end
-
-  public
 
   def me_da_gadgets
     GadgetDSL.new(self.gadgets)

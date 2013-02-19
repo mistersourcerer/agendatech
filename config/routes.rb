@@ -21,31 +21,32 @@ Agendatech::Application.routes.draw do
     end
   end
 
-  match '/auth/:provider/callback' => 'authentications#create'
-  match '/auth/failure' => 'authentications#failure'
-  match 'gadgets/:evento/:tipo' => 'gadgets#create', :as => :gadgets
-  match 'rss/feed.:format' => 'rss#feed', :as => :feed
-  match '/' => 'eventos#index'
   resources :eventos, :path_names => {:new => 'novo', :edit => 'editar'}
-  root :to => 'eventos#index'
   resources :comentarios
-  match 'calendario/eventos' => 'calendario#index', :as => :calendario
-  match 'calendario/eventos/:estado' => 'calendario#index', :as => :calendario_por_estado
   resources :grupos
-  match 'colaboradores' => 'sobre#colaboradores', :as => :colaboradores
-  match 'facebook' => 'sobre#facebook', :as => :facebook  
-  match 'mobile/eventos' => 'mobile#eventos', :format  => :json
-  match 'mobile/grupos' => 'mobile#grupos', :format  => :json  
-  match 'contato' => 'contato#index', :as => :contato
-  match 'sobre' => 'sobre#index', :as => :sobre
-  match 'calendario' => 'calendario#links', :as => :calendario_link
-  match 'eventos/tecnologia/:ano/:id' => 'eventos#show', :as => :evento
-  match 'grupos/:nome/:id/eventos' => 'grupos#show', :as => :grupo
-  match 'busca/eventos/:estado' => 'eventos#index', :as => :eventos_por_estado
-  match 'busca/eventos/:ano/:month' => 'eventos#index', :as => :eventos_por_mes
-  match 'cursos/tecnologia/:ano' => 'eventos#cursos', :as => :cursos
-  match 'eventos/lista/:id' => 'eventos#lista',:as => :participantes
-  match 'atividades/:nick' => 'atividades_do_usuario#index', :as => :atividades_do_usuario
-  match '/:controller(/:action(/:id))'
+
+  get '/auth/:provider/callback' => 'authentications#create'
+  get '/auth/failure' => 'authentications#failure'
+  get 'gadgets/:evento/:tipo' => 'gadgets#create', :as => :gadgets
+  get 'rss/feed.:format' => 'rss#feed', :as => :feed
+  get 'calendario/eventos' => 'calendario#index', :as => :calendario
+  get 'calendario/eventos/:estado' => 'calendario#index', :as => :calendario_por_estado
+  get 'colaboradores' => 'sobre#colaboradores', :as => :colaboradores
+  get 'facebook' => 'sobre#facebook', :as => :facebook  
+  get 'mobile/eventos' => 'mobile#eventos', :format  => :json
+  get 'mobile/grupos' => 'mobile#grupos', :format  => :json  
+  get 'contato' => 'contato#index', :as => :contato
+  get 'sobre' => 'sobre#index', :as => :sobre
+  get 'calendario' => 'calendario#links', :as => :calendario_link
+  get 'eventos/tecnologia/:ano/:id' => 'eventos#show', :as => :evento
+  get 'grupos/:nome/:id/eventos' => 'grupos#show', :as => :grupo
+  get 'busca/eventos/:estado' => 'eventos#index', :as => :eventos_por_estado
+  get 'busca/eventos/:ano/:month' => 'eventos#index', :as => :eventos_por_mes
+  get 'cursos/tecnologia/:ano' => 'eventos#cursos', :as => :cursos
+  get 'eventos/lista/:id' => 'eventos#lista',:as => :participantes
+  get 'atividades/:nick' => 'atividades_do_usuario#index', :as => :atividades_do_usuario
+  get '/:controller(/:action(/:id))'
+
+  root :to => 'eventos#index'
 end
 

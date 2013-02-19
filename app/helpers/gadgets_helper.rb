@@ -27,6 +27,6 @@ module GadgetsHelper
   end
 
   def image_extension image
-    image.match(/(\w{3,4})$/).to_s    
+    image.match(/(\w{3,4})$/).to_s
   end
 end

@@ -3,8 +3,16 @@ require 'spec_helper'
 describe EventosHelper do
 
   it "deveria gerar uma url valida baseada no evento" do
-    evento = Evento.create(:nome => 'nome',:descricao => 'desc',:site => 'http://www.teste.com.br',:data => Date.today)
-    helper.evento_full_path(evento).should == evento_path(:ano => Date.today.year, :id => evento)
+    data = Date.today
+
+    evento = Evento.new
+    evento.nome = 'nome'
+    evento.descricao = 'descricao'
+    evento.site = 'http://www.teste.com.br'
+    evento.data = data
+    evento.save!
+
+    helper.evento_full_path(evento).should == evento_path(:ano => data.year, :id => evento)
  end
  
  describe "agrupamentos de eventos" do
@@ -49,20 +57,26 @@ describe EventosHelper do
     it "deveria pegar a do usuario associado ao comentario" do
       user = User.new(:nickname => "teste",:email => "teste@teste.com.br",:image => "http://a3.twimg.com/profile_images/1201901056/ic_launcher.png")
       User.should_receive(:por_login_social).with('teste').and_return(user)
-      helper.user_pic_by(Comentario.new(:twitter => "teste")).should eq("twimages/teste.png")    
+      c = Comentario.new
+      c.twitter = "teste"
+      helper.user_pic_by(c).should eq("twimages/teste.png")    
     end
     
     it "deveria pegar a  do usuario associado ao comentario como link para o s3 caso o ambiente seja de producao" do
       Rails.env = 'production' 
       user = User.new(:nickname => "teste",:email => "teste@teste.com.br",:image => "http://a3.twimg.com/profile_images/1201901056/ic_launcher.png")
       User.should_receive(:por_login_social).with('teste').and_return(user)
-      helper.user_pic_by(Comentario.new(:twitter => "teste")).should eq("http://s3.amazonaws.com/twitter_images/teste.png")    
+      c = Comentario.new
+      c.twitter = "teste"
+      helper.user_pic_by(c).should eq("http://s3.amazonaws.com/twitter_images/teste.png")    
       Rails.env = 'test' 
     end  
     
     it "deveria pegar a padrao para comentarios anteriores, quando usuarios nao precisavam se logar" do
       User.should_receive(:por_login_social).with('teste').and_return(nil)
-      helper.user_pic_by(Comentario.new(:twitter => "teste")).should eq("twitter_usr_padrao.png")    
+      c = Comentario.new
+      c.twitter = "teste"
+      helper.user_pic_by(c).should eq("twitter_usr_padrao.png")    
     end 
   
   end 

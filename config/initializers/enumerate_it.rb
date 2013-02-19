@@ -1,1 +1,1 @@
-ActiveRecord::Base.send :include, EnumerateIt
+ActiveRecord::Base.send :extend, EnumerateIt
