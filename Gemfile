@@ -1,6 +1,6 @@
 source :rubygems
 gem "mysql2"
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem "paperclip"
 gem "twitter", "4.5.0"
 gem "omniauth-twitter"
