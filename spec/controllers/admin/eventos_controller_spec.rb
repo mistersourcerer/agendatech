@@ -11,6 +11,8 @@ describe Admin::EventosController do
     end
 
     it "deveria aprovar o evento" do
+      tweet = "#{@evento_desaprovado.nome} #agendatech #{evento_url(:ano => @evento_desaprovado.data.year,:id=>@evento_desaprovado)}"
+      Twitter::Client.any_instance.should_receive(:update).with(tweet)
       get :aprovar, {:id => @evento_desaprovado.to_param}
       Evento.find(@evento_desaprovado.id).aprovado?.should be_true
     end
@@ -26,6 +28,6 @@ describe Admin::EventosController do
     end
 
   end
-  
+
 
 end
