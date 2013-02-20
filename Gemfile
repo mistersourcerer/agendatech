@@ -2,6 +2,7 @@ source :rubygems
 
 gem "rails", git: "git://github.com/rails/rails.git"
 gem "protected_attributes"
+gem "friendly_id", git: "git@github.com:ricardovaleriano/friendly_id.git", branch: "rails4"
 
 gem "mysql2"
 gem "paperclip"
@@ -9,7 +10,6 @@ gem "twitter", ">= 4.5.0"
 gem "omniauth-twitter"
 gem "devise"
 gem "icalendar"
-gem "friendly_id", git: "git@github.com:norman/friendly_id.git", branch: "rails4"
 gem 'validates_timeliness'
 gem "omniauth"
 gem "aws-s3"

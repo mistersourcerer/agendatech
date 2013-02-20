@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :tag_cloud, :twitter_search,:evento_destaque
+  before_filter :tag_cloud, :twitter_search, :evento_destaque
   helper_method :meses, :numero_do_mes, :estados, :nome_do_estado
 
   protected
@@ -81,21 +81,20 @@ class ApplicationController < ActionController::Base
                  group("#{Tag.table_name}.id").group("#{Tag.table_name}.name").having("COUNT(*) > 5").all
   end
 
-  def twitter_search    
+  def twitter_search
     @ultimos_comentarios = Comentario.ultimos
-    
+
     eventos = Evento.ultimos_twitados
     @twits = []
 
     eventos.each do |e|
-       if e.twitter_hash && !e.twitter_hash == "" 
+      if e.twitter_hash && !e.twitter_hash == ""
         Twitter::Search.new.q(e.twitter_hash).page(1).per_page(1).each do |r|
           @twits << r
         end
-       end
+      end
     end
     @twits
-    
   end
 
   def evento_destaque

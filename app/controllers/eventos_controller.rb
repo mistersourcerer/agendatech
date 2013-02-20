@@ -1,18 +1,15 @@
 #encoding: utf-8
 class EventosController < ApplicationController
   uses_tiny_mce :only => [:new,:create]
-  
-  private
-  
+
   def tenta_marcar_gadget
     if session[:quase_um_gadget] && current_user
       quase_um_gadget = session[:quase_um_gadget]
       quase_um_gadget.associa current_user
       session[:quase_um_gadget] = nil
-    end    
+    end
   end
-  
-  public
+  private :tenta_marcar_gadget
 
   def index
     tenta_marcar_gadget
@@ -26,7 +23,7 @@ class EventosController < ApplicationController
       end
     end
   end
-  
+
   def cursos
     @eventos = Evento.que_ainda_vao_rolar(TipoEvento::CURSO)
     render :action => 'index'

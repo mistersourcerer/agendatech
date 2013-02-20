@@ -6,7 +6,9 @@ describe EventosController do
      @evento1 = Evento.create :nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data => "10/09/2020", :estado => 'BA',:aprovado => true
      @evento2 = Evento.create :nome => "evento1", :descricao => "desc", :site => "http://www.example.com", :data => "10/10/2020", :estado => 'BA',:aprovado => true
      @evento3 = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => "10/10/2020", :estado => 'SP',:aprovado => true
-     @evento4 = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => "10/10/2020", :estado => 'SP',:aprovado => true,:tipo_evento => TipoEvento::CURSO                                                           
+     @evento4 = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => "10/10/2020", :estado => 'SP',:aprovado => true
+     @evento4.tipo_evento = TipoEvento::CURSO
+     @evento4.save!
   end
   
   describe "get para a home" do
@@ -31,7 +33,7 @@ describe EventosController do
       assigns[:eventos].length.should eq 1
     end    
   end
-  
+
   describe "get para show" do
     it "deveria carregar o evento baseado no id" do
       get :show, {:id => @evento2.to_param}
@@ -39,7 +41,7 @@ describe EventosController do
       assigns[:comentario].should_not be_nil
     end
   end
-  
+
   describe "post para create" do
 
     it "deveria salvar o evento com a data de termino igual a de inicio caso nao tenha sido passada a de termino" do
@@ -52,8 +54,9 @@ describe EventosController do
     end
 
     it "deveria salvar o evento com a data de termino especificada" do
-      data_termino = (Time.zone.now + 1.day)
-      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data =>  Time.new.strftime("%d/%m/%Y"),:data_termino => data_termino.strftime("%d/%m/%Y"), :estado => 'BA'}
+      hoje = Date.today
+      data_termino = hoje + 1
+      post :create, :evento => {:nome => "evento", :descricao => "desc", :site => "http://www.example.com", :data =>  hoje.strftime("%d/%m/%Y"), :data_termino => data_termino.strftime("%d/%m/%Y"), :estado => 'BA'}
       assigns[:evento].aprovado.should be_false
       assigns[:evento].tipo_evento.should eq TipoEvento::CONFERENCIA
       assigns[:evento].data_termino.to_date.should eq data_termino.to_date

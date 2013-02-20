@@ -9,9 +9,15 @@ describe Evento do
        @evento3 = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'SP',:aprovado => true
        @curso = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => Date.today, :estado => 'SP',:aprovado => true,:tipo_evento => TipoEvento::CURSO
        @evento_de_outro_ano = Evento.create :nome => "evento2", :descricao => "desc", :site => "http://www.example.com", :data => '10/10/2006', :estado => 'SP',:aprovado => true
-       Gadget.create :tipo => Gadget.tipos[:eu_vou][:nome], :evento_id => @evento1.id, :user_id => 1
-       Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
-       Gadget.create :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
+
+       g1 = Gadget.new :tipo => Gadget.tipos[:eu_vou][:nome], :evento_id => @evento1.id, :user_id => 1
+       g1.save!
+
+       g2 = Gadget.new :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
+       g2.save!
+
+       g3 = Gadget.new :tipo => 'promocao', :evento_id => @evento1.id, :user_id => 1
+       g3.save!
     end
 
     describe "aprovação" do
@@ -79,9 +85,9 @@ describe Evento do
   end
 
   describe "listagens dos eventos aprovados" do
-      it "deveria listar os eventos que vao rolar por algum tipo diferente de conferencia" do
-          Evento.que_ainda_vao_rolar(TipoEvento::CURSO).length.should eq(1)
-      end
+    it "deveria listar os eventos que vao rolar por algum tipo diferente de conferencia" do
+      Evento.que_ainda_vao_rolar(TipoEvento::CURSO).length.should eq(1)
+    end
 
       it "que ainda vao ocorrer" do
           Evento.que_ainda_vao_rolar.length.should eq(3)
@@ -113,13 +119,14 @@ describe Evento do
   end
 
   describe "gadgets associados" do
-      it "deveria pegar apenas os gadgets do tipo eu vou" do
-        Evento.find_by_id(@evento1.id).me_da_gadgets.eu_vou.length.should eq(1)
-      end
+    it "deveria pegar apenas os gadgets do tipo eu vou" do
+      evento = Evento.find(@evento1.id)
+      evento.me_da_gadgets.eu_vou.length.should eq(1)
+    end
 
-      it "deveria pegar apenas os gadgets do tipo promocao" do
-        Evento.find_by_id(@evento1.id).me_da_gadgets.promocao.length.should eq(2)
-      end
+    it "deveria pegar apenas os gadgets do tipo promocao" do
+      Evento.find_by_id(@evento1.id).me_da_gadgets.promocao.length.should eq(2)
+    end
   end
 
 end

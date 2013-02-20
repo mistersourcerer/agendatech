@@ -41,8 +41,8 @@ GIT
       thor (>= 0.17.0, < 2.0)
 
 GIT
-  remote: git@github.com:norman/friendly_id.git
-  revision: f7e662dc56f229c17ff73f2bd046b8d0e5753fda
+  remote: git@github.com:ricardovaleriano/friendly_id.git
+  revision: 1495430d3beabf1b95f28c02d6bc75c08355c50e
   branch: rails4
   specs:
     friendly_id (4.1.0.beta.2)
