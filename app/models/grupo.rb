@@ -11,8 +11,8 @@ class Grupo < ActiveRecord::Base
 
   attr_accessible :logo, :nome, :tag_list, :site
 
-  scope :nao_aprovados, -> { conditions(aprovado: false) }
-  scope :aprovados, -> { order("nome ASC").conditions(aprovado: true) }
+  scope :nao_aprovados, -> { where aprovado: false }
+  scope :aprovados, -> { where aprovado: true }
   scope :por_nome, -> { order("nome ASC") }
 
   def aprovar!

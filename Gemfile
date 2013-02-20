@@ -17,6 +17,7 @@ gem "dalli"
 gem "enumerate_it"
 gem 'aws-sdk'
 gem "nokogiri"
+gem "dynamic_form"
 
 group :development, :test do
   gem "rspec-rails", ">= 2.6"
