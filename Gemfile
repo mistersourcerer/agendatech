@@ -3,6 +3,7 @@ source :rubygems
 gem "rails", git: "git://github.com/rails/rails.git"
 gem "protected_attributes"
 gem "friendly_id", git: "git@github.com:ricardovaleriano/friendly_id.git", branch: "rails4"
+gem "acts-as-taggable-on"
 
 gem "mysql2"
 gem "paperclip"

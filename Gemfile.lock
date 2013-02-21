@@ -51,6 +51,8 @@ GEM
   remote: http://rubygems.org/
   specs:
     activerecord-deprecated_finders (0.0.3)
+    acts-as-taggable-on (2.1.1)
+      rails
     arel (3.0.2)
     atomic (1.0.1)
     aws-s3 (0.6.3)
@@ -211,6 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   aws-s3
   aws-sdk
   capybara

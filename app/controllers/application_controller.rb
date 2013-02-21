@@ -35,31 +35,31 @@ class ApplicationController < ActionController::Base
     {
     "AC" =>   "Acre"  ,
     "AL" =>   "Alagoas"  ,
-    "AP" =>    "Amapá"  ,
-    "AM" =>    "Amazonas"  ,
+    "AP" =>   "Amapá"  ,
+    "AM" =>   "Amazonas"  ,
     "BA" =>   "Bahia"  ,
-    "CE" =>    "Ceará"  ,
-    "DF" =>    "Distrito Federal"  ,
-    "GO" =>    "Goiás"  ,
+    "CE" =>   "Ceará"  ,
+    "DF" =>   "Distrito Federal"  ,
+    "GO" =>   "Goiás"  ,
     "ES" =>   "Espírito Santo"  ,
-    "MA" =>    "Maranhão"  ,
+    "MA" =>   "Maranhão"  ,
     "MT" =>   "Mato Grosso"  ,
-    "MS" =>    "Mato Grosso do Sul"  ,
+    "MS" =>   "Mato Grosso do Sul"  ,
     "MG" =>   "Minas Gerais"  ,
-    "PA" =>    "Pará"  ,
+    "PA" =>   "Pará"  ,
     "PB" =>   "Paraiba"  ,
-    "PR" =>    "Paraná"  ,
-    "PE" =>    "Pernambuco"  ,
-    "PI" =>    "Piauí"  ,
-    "RJ" =>  "Rio de Janeiro"  ,
+    "PR" =>   "Paraná"  ,
+    "PE" =>   "Pernambuco"  ,
+    "PI" =>   "Piauí"  ,
+    "RJ" =>   "Rio de Janeiro"  ,
     "RN" =>   "Rio Grande do Norte"  ,
-    "RS" =>    "Rio Grande do Sul"  ,
+    "RS" =>   "Rio Grande do Sul"  ,
     "RO" =>   "Rondônia"  ,
-    "RR" =>    "Rorâima"  ,
+    "RR" =>   "Rorâima"  ,
     "SP" =>   "São Paulo"  ,
-    "SC" =>    "Santa Catarina"  ,
+    "SC" =>   "Santa Catarina"  ,
     "SE" =>   "Sergipe"  ,
-    "TO" =>    "Tocantins"
+    "TO" =>   "Tocantins"
     }
   end
 
@@ -72,13 +72,9 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   private
+
   def tag_cloud
-#     @tags = Evento.tag_counts
-    #mangue temporario enquanto nao descobrimos o bug do acts_as_taggable_on_steroids
-     @tags = Tag.select("#{Tag.table_name}.id, #{Tag.table_name}.name, COUNT(*) AS count").
-                 joins(:taggings).
-                 joins("INNER JOIN #{Evento.table_name} ON #{Evento.table_name}.id = #{Tagging.table_name}.taggable_id").where("#{Tagging.table_name}.taggable_type = 'Evento'").
-                 group("#{Tag.table_name}.id").group("#{Tag.table_name}.name").having("COUNT(*) > 5").all
+    @tags = Evento.tag_counts_on(:tags)
   end
 
   def twitter_search

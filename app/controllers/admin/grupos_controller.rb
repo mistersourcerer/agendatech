@@ -23,14 +23,14 @@ class Admin::GruposController < ApplicationController
   end
   
   def update
-     @grupo = Grupo.find(params[:id])
-      if @grupo.update_attributes(params[:grupo])
-        flash[:notice] = "Grupo editado com sucesso"
-        redirect_to :action => "index"
-      else
-        render :action => 'edit'
-      end
-  end
-  
+    @grupo = Grupo.find(params[:id])
+    if @grupo.update_attributes(params[:grupo])
+      @grupo.atualiza_tags(params[:tag_list][:tag_list])
 
+      flash[:notice] = "Grupo editado com sucesso"
+      redirect_to :action => "index"
+    else
+      render :action => 'edit'
+    end
+  end
 end
