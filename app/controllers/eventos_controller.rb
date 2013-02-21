@@ -54,7 +54,7 @@ class EventosController < ApplicationController
   end
 
   def tag
-    @eventos = Evento.find_tagged_with(params[:id], :order => "data DESC")
+    @eventos = Evento.tagged_with(params[:id], :any => true)
     @tag = params[:id]
     render :action => "index"
   end

@@ -22,13 +22,14 @@ class Admin::EventosController < ApplicationController
   end
 
   def update
-     @evento = Evento.find_by_cached_slug(params[:id])
-      if @evento.update_attributes(params[:evento])
-        flash[:notice] = "Evento editado com sucesso"
-        redirect_to :action => "index"
-      else
-        render :action => 'edit'
-      end
+    @evento = Evento.find_by_cached_slug(params[:id])
+    if @evento.update_attributes(params[:evento])
+      @evento.atualiza_tags(params[:tag_list][:tag_list])
+      flash[:notice] = "Evento editado com sucesso"
+      redirect_to :action => "index"
+    else
+      render :action => 'edit'
+    end
   end
 
   def aprovar

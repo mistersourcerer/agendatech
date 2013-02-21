@@ -2,7 +2,7 @@
 class Evento < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :nome, :descricao, :site, :data, :estado, :aprovado, :data_termino, :tipo_evento, :twitter, :twitter_hash, :grupo_id
+  attr_accessible :nome, :descricao, :site, :data, :estado, :aprovado, :data_termino, :tipo_evento, :tag_list, :twitter, :twitter_hash, :grupo_id
 
   has_many :comentarios
   has_many :gadgets, -> { order 'id desc' }
@@ -18,9 +18,9 @@ class Evento < ActiveRecord::Base
   validates_presence_of :nome, :site, :descricao, :message => "Campo obrigatório"
 
   validates_date :data,
-      format: "dd/mm/yyyy",
-      invalid_date_message: "Formato inválido",
-      if: Proc.new { |evento| !evento.aprovado }
+    format: "dd/mm/yyyy",
+    invalid_date_message: "Formato inválido",
+    if: Proc.new { |evento| !evento.aprovado }
 
   validates_date :data_termino,
     format: "dd/mm/yyyy",
@@ -61,13 +61,22 @@ class Evento < ActiveRecord::Base
   end
 
   def desaprova!
-     self.aprovado = false
-     self.update_attributes(:aprovado => false)
+    self.aprovado = false
+    self.update_attributes(:aprovado => false)
   end
 
   def aprova_como_curso!
     self.aprovado = true
     self.update_attributes(:aprovado => true,:tipo_evento => TipoEvento::CURSO)
+  end
+
+  def atualiza_tags(tags_string)
+    ActsAsTaggableOn::Tagging.where(taggable_type: self.class, taggable_id: id).each {|t| t.destroy}
+    tag_list = ActsAsTaggableOn::TagList.from tags_string
+    tags = ActsAsTaggableOn::Tag.find_or_create_all_with_like_by_name tag_list
+    tags.each do |tag|
+      ActsAsTaggableOn::Tagging.create! tag_id: tag.id, context: "tags", taggable: self
+    end
   end
 
   module Scopes
@@ -158,6 +167,6 @@ class GadgetDSL
   end
 
   def method_missing(nome_do_metodo, *args, &block)
-     do_tipo(nome_do_metodo)
+    do_tipo(nome_do_metodo)
   end
 end

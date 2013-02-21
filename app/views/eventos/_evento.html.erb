@@ -22,7 +22,7 @@
     <small><%= nome_do_estado evento.estado %></small><br/>
 
     <p class="tags">
-    <% evento.tags.each do |tag| %>
+    <% evento.tag_counts_on(:tags).each do |tag| %>
       <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => "tag tags" %>
     <% end %>
     </p>
