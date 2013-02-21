@@ -34,8 +34,12 @@ class Admin::EventosController < ApplicationController
   def aprovar
     evento = Evento.find_by_cached_slug(params[:id])
     evento.aprova!
-    twitter = Twitter::Client.new
-    twitter.update("#{evento.nome} #agendatech #{evento_url(:ano => evento.data.year,:id=>evento)}")
+    begin
+      twitter = Twitter::Client.new
+      twitter.update("#{evento.nome} #agendatech #{evento_url(:ano => evento.data.year,:id=>evento)}")
+    rescue Exception => e
+      logger.warn(e.message)
+    end
     flash[:notice] = "Evento aprovado."
     redirect_to :action => 'index'
   end

@@ -2,7 +2,7 @@
 class Evento < ActiveRecord::Base
   extend FriendlyId
 
-  attr_accessible :nome, :descricao, :site, :data, :estado, :aprovado, :data_termino, :tipo_evento
+  attr_accessible :nome, :descricao, :site, :data, :estado, :aprovado, :data_termino, :tipo_evento, :twitter, :twitter_hash, :grupo_id
 
   has_many :comentarios
   has_many :gadgets, -> { order 'id desc' }
