@@ -3,6 +3,6 @@ Lista de participantes
 
 <% @participantes.each do |p| %>
   
-  <%= p%><br />
+  <%= Twitter.user(p).name %><br />
   
 <% end %>  
