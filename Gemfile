@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem "rails", git: "git://github.com/rails/rails.git"
 gem "protected_attributes"
