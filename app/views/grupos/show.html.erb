@@ -8,7 +8,7 @@
     <p id="evento"><%=h @grupo.nome  %></p>
 
     <p class="tags">
-      <% @grupo.tags.each do |tag| %>
+      <% @grupo.tag_counts_on(:tags).each do |tag| %>
         <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => "tag tags" %>
       <% end %>
     </p>

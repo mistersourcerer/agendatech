@@ -24,7 +24,7 @@
     <br/><br/>
 
     <p><span>Tags:</span>
-      <% @evento.tags.each do |tag| %>
+      <% @evento.tag_counts_on(:tags).each do |tag| %>
         <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => "tag tags" %>
       <% end %>
     </p>

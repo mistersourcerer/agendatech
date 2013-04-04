@@ -12,16 +12,15 @@
     <%= auto_discovery_link_tag :rss, feed_path('rss') %>
   </head>
   <body>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>	
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>	
     <div id="header">
-
       <div class="container">
         <h1>
           <a href="/">
@@ -38,15 +37,14 @@
           </div>
           <div style="clear:right"></div>
         <% end %>
-
       </div>
 
       <div id="menu">
         <ul>
           <% unless user_signed_in? %>
             <li>
-            <%= link_to "Login com twitter", "/auth/twitter" %>
-            <span class="check"></span>
+              <%= link_to "Login com twitter", "/auth/twitter" %>
+              <span class="check"></span>
             </li>
           <% end %>
           <li><%= tab_link_to 'RSS', feed_path('rss') %></li>
@@ -68,34 +66,31 @@
 
         <% if flash[:aguarde] %>
           <p class="notice"><%=flash[:aguarde]%></p>
-        <% end  %>
-				
-				
-          <!-- <a href="http://www.rubyconf.com.br/" target="_blank">
-            <div id="banner"></div>
-          </a> -->
-          <%@banners.each do |banner|%>
-    					<div class="banner_quems">
-    						<p><%=banner.titulo.html_safe%></p>
-    						<br/>
-    						<hr>
-
-                <%= link_to image_tag(banner.nome_imagem), evento_full_path(banner.evento) %>
-                <p class="sub"><%=banner.descricao.html_safe%></p>
-                <div style="clear: both;"></div>
-    						<%= eu_vou banner.evento, banner.gadget_info[:label], banner.gadget_info[:label_confirmacao], "st_banner",banner.tipo_gadget_associado %>
-                <div style="clear: both;"></div>
-
-    		                <% banner.evento.me_da_gadgets.do_tipo(banner.tipo_gadget_associado).each do |gadget| %>
-                              <div class="quem_vai_pic">
-                                <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
-                              </div>
+        <% end  %>					
+        <!-- <a href="http://www.rubyconf.com.br/" target="_blank">
+          <div id="banner"></div>
+        </a> -->
+        <%@banners.each do |banner|%>
+          <div class="banner_quems">
+            <p><%=banner.titulo.html_safe%></p>
+            <br/>
+            <hr>
+            <%= link_to image_tag(banner.nome_imagem), evento_full_path(banner.evento) %>
+            <p class="sub"><%=banner.descricao.html_safe%></p>
+            <div style="clear: both;"></div>
+            <%= eu_vou banner.evento, banner.gadget_info[:label], banner.gadget_info[:label_confirmacao], "st_banner",banner.tipo_gadget_associado %>
+            <div style="clear: both;"></div>
+            <% banner.evento.me_da_gadgets.do_tipo(banner.tipo_gadget_associado).each do |gadget| %>
+            <div class="quem_vai_pic">
+              <%= link_to  (image_tag link_da_imagem_do_twitter_para("#{user_name gadget}.#{extension gadget}"), :size => "25x25"), atividades_do_usuario_path(user_name gadget) %>
+            </div>
     		                <%end%>
             
     		        </div>
     		   <%end%>
     		       		       		       		   				
 					
+
 
         <div id="left" >
         <!--p class="breadcrumb"><% if @mes %>Eventos em <%= @mes %><% end %></p>
@@ -282,7 +277,13 @@
   </div>
 
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'ajax.js' %>
+  <%= javascript_include_tag 'application.js' %>
+  <%= javascript_include_tag 'jquery-1.4.4.min.js' %>
+  <%= javascript_include_tag 'jquery.async.js' %>
+  <%= javascript_include_tag 'jquery.ui.core.js' %>
+  <%= javascript_include_tag 'jquery.ui.datepicker.js' %>
+  <%= javascript_include_tag 'rails.js' %>
 
   <%= javascript_include_tag 'jquery.tweet.min.js' %>
   <%= javascript_include_tag 'underscore-min.js' %>  
