@@ -14,4 +14,4 @@ end if File.exist?(gemfile)
 
 # new yaml engine don't like our old locale yamls, some bad format that
 # syck doesn't care about, correct the yamls would be better than this.
-YAML::ENGINE.yamler= 'syck'
+YAML::ENGINE.yamler= 'syck' if defined?(YAML::ENGINE)
